@@ -1,8 +1,10 @@
 #include "Kth_Ad.h"
-#include "advertis.h"
+#include "../ad/advertising.hpp"
 class Main {
     static constexpr int MAX_K = 5000;
     Kth_Ad Buc[MAX_K + 1];
+    
+    public:
     void Init(std::vector<Adv> advs) {  //离线操作
         for (int i = 0; i <= MAX_K; i++) {
             Buc[i].Set_K(i);

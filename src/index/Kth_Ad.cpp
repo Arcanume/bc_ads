@@ -1,5 +1,6 @@
 #include "Kth_Ad.h"
 #include <bits/stdc++.h>
+#include <string>
 #include "../ad/advertising.hpp"
 #include "roaring/roaring.hh"
 using namespace std;
@@ -22,7 +23,7 @@ void Kth_Ad::insert_Ad(const Adv& ad) {
     for (auto p : preds) {
         auto values = p.get_values();
         for (auto val : values) {
-            string attr = p.get_field_name() + ":" + to_string(val);
+            string attr = p.get_field_name() + ":" + val;
             attr_to_CNF[attr].insert({id, p.get_reverse()});
         }
     }
@@ -167,7 +168,7 @@ void Kth_Ad::Bitmap_init() {
 
 std::set<ull> Kth_Ad::Bitmap_Index(
     std::vector<std::pair<std::string, ull>> user_attribute) {
-    std::map<string, ull> field_p;
+    std::map<string, string> field_p;
     for (auto p : user_attribute) {
         field_p[p.first] = p.second;
     }

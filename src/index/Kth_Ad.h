@@ -1,5 +1,9 @@
+#ifndef KTH_AD_H
+#define KTH_AD_H
+
 #include <bits/stdc++.h>
-#include "advertis.h"
+#include "../ad/advertising.hpp"
+#include "roaring/roaring.hh"
 typedef unsigned long long ull;
 struct Kth_Ad {
     int K_size;
@@ -10,9 +14,9 @@ struct Kth_Ad {
     std::map<ull, Adv> Ads;
     std::map<ull, int> Ad_to_pos;
     std::map<int, ull> pos_to_Ad;
-    std::map<std::string, map<ull, Roaring>> forw_attr,
-        rev_attr;                          // key = p.field_name + ":" + p.val
-    std::map<string, Roaring> noLit_attr;  // key = p.field_name
+    std::map<std::string, map<string, roaring::Roaring>> forw_attr,
+        rev_attr;  // key = p.field_name + ":" + p.val
+    std::map<string, roaring::Roaring> noLit_attr;  // key = p.field_name
     std::set<string> all_attr;
     void Set_K(int);
     int size();
@@ -22,3 +26,5 @@ struct Kth_Ad {
     std::set<ull> Bitmap_Index(std::vector<std::pair<std::string, ull>>);
     std::set<ull> Boolean_Index(std::vector<std::string>);
 };
+
+#endif
