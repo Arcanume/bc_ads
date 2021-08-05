@@ -15,7 +15,7 @@ state IN 1 CA
 40000
 2
 state IN 0 CA
-genrder IN 0 M
+gender IN 0 M
 50000
 1
 age IN 0 3 4

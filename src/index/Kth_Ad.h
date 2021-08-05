@@ -2,11 +2,13 @@
 #define KTH_AD_H
 
 #include <bits/stdc++.h>
-#include "../ad/advertising.hpp"
+#include "../ad/advertising.h"
+#include "../user/user.h"
 #include "roaring/roaring.hh"
 typedef unsigned long long ull;
 struct Kth_Ad {
     int K_size;
+    Kth_Ad();
     static constexpr int Threshold = 200;
     int pos_id = 0;
     std::set<ull> CNF_id;
@@ -24,7 +26,7 @@ struct Kth_Ad {
     std::set<ull> Return_CNF(UserInfo);
     void Bitmap_init();
     std::set<ull> Bitmap_Index(UserInfo);
-    std::set<ull> Boolean_Index(std::vector<std::string>);
+    //std::set<ull> Boolean_Index(UserInfo);
 };
 
 #endif
