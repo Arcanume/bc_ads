@@ -21,9 +21,9 @@ struct Kth_Ad {
     void Set_K(int);
     int size();
     void insert_Ad(const Adv&);
-    std::set<ull> Return_CNF(std::vector<std::pair<std::string, ull>>);
+    std::set<ull> Return_CNF(UserInfo);
     void Bitmap_init();
-    std::set<ull> Bitmap_Index(std::vector<std::pair<std::string, ull>>);
+    std::set<ull> Bitmap_Index(UserInfo);
     std::set<ull> Boolean_Index(std::vector<std::string>);
 };
 

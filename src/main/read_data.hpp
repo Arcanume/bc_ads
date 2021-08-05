@@ -16,6 +16,8 @@
 #include<google/protobuf/io/zero_copy_stream_impl.h>
 #include<google/protobuf/text_format.h>
 
+
+// 读取广告数据，并将广告数据封装成对象
 vector<Adv> ListAds(const AdList& ads) {
     vector<Adv> advs;
     for (int i = 0; i < ads.ad_size(); i++) {
@@ -61,7 +63,7 @@ vector<Adv> ListAds(const AdList& ads) {
     return advs;
 }
 
-
+// 读取用户数据，并将用户数据封装为对象
 vector<UserInfo> ListUsers (UserList users) {
     vector<UserInfo> userInfos;
     for (int i = 0; i < users.user_size(); i++) {

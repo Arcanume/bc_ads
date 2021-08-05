@@ -43,10 +43,9 @@ void sub_ad(vector<Adv> &advs, const char *path) {
             } else if (temp_op == "DistanceLT") {
                 item -> set_op(AdTargetOperator::DistanceLT);
             }
-            vector<unsigned long long> temp_value = temp_preds[j].get_values();
+            vector<string> temp_value = temp_preds[j].get_values();
             for (int k = 0; k < temp_value.size(); k++) {
-                google::protobuf::int64 val = temp_value[k];
-                item -> add_value(val);
+                item -> add_value(stoul(temp_value[k]));
             }
         }
     }
@@ -68,8 +67,8 @@ void sub_user(vector<UserInfo> userInfos, const char* path) {
         vector<Feature> temp_feature = userInfos[i].get_features();
         for (int j = 0; j < temp_feature.size(); j++) {
             item -> set_field_name(temp_feature[j].get_field_name());
-            unsigned long long temp_value = temp_feature[j].get_value();
-            item -> add_value(temp_value);
+            string temp_value = temp_feature[j].get_value();
+            item -> add_value(stoul(temp_value));
         }
     }
     fstream output1(path, ios::out | ios::trunc | ios::binary);

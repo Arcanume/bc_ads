@@ -2,6 +2,7 @@
 #include <bits/stdc++.h>
 #include <string>
 #include "../ad/advertising.hpp"
+#include "../user/user.hpp"
 #include "roaring/roaring.hh"
 using namespace std;
 
@@ -42,12 +43,11 @@ void Kth_Ad::insert_Ad(const Adv& ad) {
     否则用布尔
     因为Bitmap复杂度稳定
     */
-std::set<ull> Kth_Ad::Return_CNF(
-    std::vector<std::pair<std::string, ull>> user_attribute) {
-    sort(user_attribute.begin(), user_attribute.end(),
-         [&](const std::string& a, const std::string& b) {
-             return attr_to_CNF[a].size() < attr_to_CNF[b].size();
-         });
+std::set<ull> Kth_Ad::Return_CNF(UserInfo user_attribute) {
+    auto fs = user_attribute.get_features();
+    sort(fs.begin(), fs.end(), [&](const std::string& a, const std::string& b) {
+        return attr_to_CNF[a].size() < attr_to_CNF[b].size();
+    });
 
     if (K_size < Threshold) {
         return Bitmap_Index(user_attribute);
@@ -166,11 +166,11 @@ void Kth_Ad::Bitmap_init() {
     }
 }
 
-std::set<ull> Kth_Ad::Bitmap_Index(
-    std::vector<std::pair<std::string, ull>> user_attribute) {
+std::set<ull> Kth_Ad::Bitmap_Index(UserInfo user_attribute) {
     std::map<string, string> field_p;
-    for (auto p : user_attribute) {
-        field_p[p.first] = p.second;
+    auto fs = user_attribute.get_features();
+    for (auto p : fs) {
+        field_p[p.get_field_name()] = p.get_value();
     }
     roaring::Roaring ad, buf, ads, one;
     buf.addRange(0, pos_id);
@@ -191,6 +191,9 @@ std::set<ull> Kth_Ad::Bitmap_Index(
         if (ads.contains(i)) {
             ans.insert(pos_to_Ad[i]);
         }
+    }
+    for (auto id : ad) {
+        cout << "#" << id << "\n";
     }
     return ans;
 }
